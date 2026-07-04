@@ -31,7 +31,7 @@ The "Virtual/Hidden Relay" publishes a nostr-info event, in the following struct
   "pubkey": <32-bytes lowercase hex-encoded public key of the "Virtual/Hidden Relay">,
   "kind": 10113, // as defined in NIP-01 a replacable kind-number is used for this event-type
   "tags": [
-    ["encryption", <definition of supported encryption, compare e.g. use in NIP47 info event, e.g. "nip44_v2 nip04 ...">]
+    ["encryption", <definition of supported encryption, compare e.g. use in NIP47 info event, e.g. "nip44_v2">]
   ],
   "content": "",
   "sig": <64-bytes lowercase hex of the signature of the sha256 hash of the serialized event data, which is the same as the "id" field>
@@ -48,10 +48,10 @@ The nns communication event has the following pattern:
   "kind": 27901, // as defined in NIP-01 an ephemeral kind-number is used for this event-type
   "tags": [
     ["p", <32-bytes lowercase hex-encoded public key of the receiver of the message (e.g. "Virtual/Hidden Relay" or "Virtual Client">],
-    ["encryption", <definition of encryption, compare e.g. use in NIP47, e.g. "nip44_v2">]
+    ["encryption", <definition of encryption, e.g. "nip44_v2">]
   ],
   "content": encrypt_as_defined_in_encryption_tag({
-    <messages between client and relay as defined in e.g. NIP01, NIP77, ... in the nostr-protocol>
+    <messages between client and relay as defined in other nostr-protocol>
   }),
   "sig": <64-bytes lowercase hex of the signature of the sha256 hash of the serialized event data, which is the same as the "id" field>
 }
