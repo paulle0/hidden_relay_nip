@@ -34,7 +34,7 @@ The "Virtual/Hidden Relay" publishes, or delivers on request, a nostr-info event
 }
 ~~~
 
-The user of the "Virtual/Hidden Relay" references the "Virtual Relay" in events that need a `r`-tag (e.g. kind `10002`), with ["r", "nns://pubkey-hex:relay1:relay2:...] (to include a relay hint directly, where to find the 10112 and 10113 events).
+The user of the Virtual/Hidden Relay references it in events requiring an r-tag (e.g. kind 10002) with ["r", "nns://pubkey", <rendez-vous-relay1>, <rendez-vous-relay2>, ...]. Clients detecting the nns:// prefix treat the tag as a hidden/virtual relay reference and use the pubkey and rendezvous relays.
 For display there should be a new bech32 string-format in the format 'nrvrelay1...'. The bech32-string should follow in general the instructions of NIP19. The prefix should be 'nrvrelay'. TLV 0 is the 32 bytes of the pubkey key of the "hidden relay". TLV 1 is the specified rendez-vous(rv)-relays of the "hidden relay". TLV 2 is the optional pubkey of the administrator. And TLV 3 is the kind number 10112.
 
 
