@@ -3,7 +3,7 @@
 This nip should introduce a way of communication between a "Virtual Client" with a "Virtual/Hidden Relay", both identified by a nostr-npub, over nostr events. 
 
 
-The "Virtual/Hidden Relay" creates a nostr-nsec/npub identity, or is attributed with an existing one. It publishes a kind `10112`-event with relays on which it listens to nns-requests and sends nns-responses.
+The "Virtual/Hidden Relay" creates a nostr-nsec/npub identity, or is attributed with an existing one. It publishes a kind `10112`-event with relays / "rendez-vous points" on which it listens to nns-requests and sends nns-responses.
 The kind `10112`-event follows the structure of NIP65 and NIP51 and signals that the pukey is reachable for nns-communication there.
 
 ~~~
@@ -19,11 +19,7 @@ The kind `10112`-event follows the structure of NIP65 and NIP51 and signals that
 }
 ~~~
 
-
-The user of the "Virtual/Hidden Relay" references the "Virtual Relay" in events that need a `r`-tag (e.g. kind `10002`), with ["r", "nns://npub1..."], or alternatively with ["r", "nns://nprofile1..."] (to include a relay hint directly, where to find the 10112 and 10113 events).
-
-
-The "Virtual/Hidden Relay" publishes a nostr-info event, in the following structure:
+The "Virtual/Hidden Relay" publishes, or delivers on request, a nostr-info event, in the following structure:
 
 ~~~
 {
@@ -33,10 +29,13 @@ The "Virtual/Hidden Relay" publishes a nostr-info event, in the following struct
   "tags": [
     ["encryption", <definition of supported encryption, compare e.g. use in NIP47 info event, e.g. "nip44_v2">]
   ],
-  "content": "",
+  "content": "<NIP-11 relay Information Document>",
   "sig": <64-bytes lowercase hex of the signature of the sha256 hash of the serialized event data, which is the same as the "id" field>
 }
 ~~~
+
+The user of the "Virtual/Hidden Relay" references the "Virtual Relay" in events that need a `r`-tag (e.g. kind `10002`), with ["r", "nns://pubkey-hex:relay1:relay2:...] (to include a relay hint directly, where to find the 10112 and 10113 events).
+For display there should be a new bech32 string-format in the format 'nrvrelay1...'. The bech32-string should follow in general the instructions of NIP19. The prefix should be 'nrvrelay'. TLV 0 is the 32 bytes of the pubkey key of the "hidden relay". TLV 1 is the specified rendez-vous(rv)-relays of the "hidden relay". TLV 2 is the optional pubkey of the administrator. And TLV 3 is the kind number 10112.
 
 
 The nns communication event has the following pattern:
