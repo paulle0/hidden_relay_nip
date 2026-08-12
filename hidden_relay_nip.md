@@ -34,8 +34,9 @@ The "Virtual/Hidden Relay" publishes, or delivers on request, a nostr-info event
 }
 ~~~
 
-The user of the Virtual/Hidden Relay references it in events requiring an r-tag (e.g. kind 10002) with ["r", "nrv://pubkey", "<rendez-vous-relay1>", "<rendez-vous-relay2>", ...]. Clients detecting the nrv:// prefix treat the tag as a hidden/virtual relay reference and use the pubkey and rendezvous relays.
+The user of the Virtual/Hidden Relay references it in events requiring an r-tag (e.g. kind 10002) with ["r", "nrv://pubkey", "<rendez-vous-relay1 >", "<rendez-vous-relay2 >", ...]. Clients detecting the nrv:// prefix treat the tag as a hidden/virtual relay reference and use the pubkey and rendezvous relays.
 For display there should be a new bech32 string-format in the format 'nrvrelay1...'. The bech32-string should follow in general the instructions of NIP19. The prefix should be 'nrvrelay'. TLV 0 is the 32 bytes of the pubkey key of the "hidden relay". TLV 1 is the specified rendez-vous(rv)-relays of the "hidden relay". TLV 2 is the optional pubkey of the administrator.
+Another possible url-format is e.g. 'nostr+nrv://<hex>?relay=wss://nos.lol&relay=wss://relay.damus.io&admin=<hex>'.
 
 The nrv communication event has the following pattern:
 
