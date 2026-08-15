@@ -49,10 +49,12 @@ The nrv communication event has the following pattern:
     ["encryption", <definition of encryption, e.g. "nip44_v2">]
   ],
   "content": encrypt_as_defined_in_encryption_tag({
-    <messages between client and relay as defined in other nostr-protocol>
+    [<messages between client and relay as defined in other nostr-protocol>, ...]
   }),
   "sig": <64-bytes lowercase hex of the signature of the sha256 hash of the serialized event data, which is the same as the "id" field>
 }
 ~~~
+
+The messages in the encrypted content are ordered in an array, so it is possible to send multiple e.g. events in one kind 27901-event. The content should be limited to some size, e.g. 30kB or similar so that it is transferable by most relays.
 
 The nrv communication events should be treated as ephemeral by relays.
