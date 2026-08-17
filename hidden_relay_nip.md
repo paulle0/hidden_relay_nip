@@ -55,6 +55,6 @@ The nrv communication event has the following pattern:
 }
 ~~~
 
-The messages in the encrypted content are ordered in an array, so it is possible to send multiple e.g. events in one kind 27901-event. The content should be limited to some size, e.g. 30kB or similar so that it is transferable by most relays.
+The messages in the encrypted content are ordered in an array, so it is possible to send multiple messages in one kind 27901-event. The content should be limited to some size, e.g. 30kB or similar so that it is transferable by most relays.
 
 The nrv communication events should be treated as ephemeral by relays.
